@@ -95,6 +95,27 @@ button:hover {
 #lista li {
   padding: 12px;
   border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.receita {
+  color: green;
+  font-weight: bold;
+}
+
+.despesa {
+  color: red;
+  font-weight: bold;
+}
+
+#lista button {
+  width: auto;
+  padding: 7px 12px;
+  font-size: 13px;
+  background: #555;
 }
 
 @media (max-width: 600px) {
@@ -105,6 +126,10 @@ button:hover {
 
   h1 {
     font-size: 26px;
+  }
+
+  #lista li {
+    flex-wrap: wrap;
   }
 
 }
