@@ -10,13 +10,16 @@ function adicionarMovimentacao() {
   const valor =
     Number(document.getElementById("valor").value);
 
+  const data =
+    document.getElementById("data").value;
+
   const tipo =
     document.getElementById("tipo").value;
 
 
-  if (descricao === "" || valor <= 0) {
+  if (descricao === "" || valor <= 0 || data === "") {
 
-    alert("Preencha a descrição e um valor válido.");
+    alert("Preencha a descrição, o valor e a data.");
 
     return;
   }
@@ -29,6 +32,8 @@ function adicionarMovimentacao() {
     descricao: descricao,
 
     valor: valor,
+
+    data: data,
 
     tipo: tipo
 
@@ -44,6 +49,8 @@ function adicionarMovimentacao() {
 
   document.getElementById("valor").value = "";
 
+  document.getElementById("data").value = "";
+
 
   atualizarTela();
 }
@@ -55,6 +62,15 @@ function salvarDados() {
     "movimentacoes",
     JSON.stringify(movimentacoes)
   );
+
+}
+
+
+function formatarData(data) {
+
+  const partes = data.split("-");
+
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
 
 }
 
@@ -81,8 +97,19 @@ function atualizarTela() {
     const informacoes =
       document.createElement("span");
 
+
+    let textoData = "";
+
+    if (movimentacao.data) {
+
+      textoData =
+        ` - ${formatarData(movimentacao.data)}`;
+
+    }
+
+
     informacoes.textContent =
-      `${movimentacao.descricao} - R$ ${movimentacao.valor.toFixed(2)}`;
+      `${movimentacao.descricao} - R$ ${movimentacao.valor.toFixed(2)}${textoData}`;
 
 
     informacoes.classList.add(
@@ -92,6 +119,7 @@ function atualizarTela() {
 
     const botao =
       document.createElement("button");
+
 
     botao.textContent = "Excluir";
 
