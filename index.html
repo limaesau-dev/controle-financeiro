@@ -22,13 +22,11 @@
     <header class="cabecalho">
 
       <div>
-
         <h1>💰 Controle Financeiro</h1>
 
         <p>
           Organize suas receitas e despesas de forma simples.
         </p>
-
       </div>
 
     </header>
@@ -64,126 +62,141 @@
 
       </div>
 
+
+      <div class="card quantidade-card">
+
+        <span>📋 Movimentações</span>
+
+        <strong id="contador">0</strong>
+
+      </div>
+
     </section>
 
 
-    <!-- FORMULÁRIO -->
+    <!-- NOVA MOVIMENTAÇÃO -->
 
     <section class="formulario">
 
       <h2>➕ Nova movimentação</h2>
 
-      <div class="campo">
 
-        <label for="descricao">
-          Descrição
-        </label>
+      <div class="form-grid">
 
-        <input
-          type="text"
-          id="descricao"
-          placeholder="Ex: Salário, Mercado..."
-        >
+        <div class="campo">
 
-      </div>
+          <label for="descricao">
+            Descrição
+          </label>
 
+          <input
+            type="text"
+            id="descricao"
+            placeholder="Ex: Salário, Mercado..."
+          >
 
-      <div class="campo">
-
-        <label for="valor">
-          Valor
-        </label>
-
-        <input
-          type="number"
-          id="valor"
-          placeholder="Ex: 1500.00"
-          step="0.01"
-        >
-
-      </div>
+        </div>
 
 
-      <div class="campo">
+        <div class="campo">
 
-        <label for="data">
-          📅 Data da movimentação
-        </label>
+          <label for="valor">
+            Valor
+          </label>
 
-        <input
-          type="date"
-          id="data"
-        >
+          <input
+            type="number"
+            id="valor"
+            placeholder="Ex: 1500.00"
+            step="0.01"
+            min="0"
+          >
 
-      </div>
-
-
-      <div class="campo">
-
-        <label for="categoria">
-          🏷️ Categoria
-        </label>
-
-        <select id="categoria">
-
-          <option value="" disabled selected>
-            Selecione uma categoria
-          </option>
-
-          <option value="Alimentação">
-            🍔 Alimentação
-          </option>
-
-          <option value="Transporte">
-            🚗 Transporte
-          </option>
-
-          <option value="Moradia">
-            🏠 Moradia
-          </option>
-
-          <option value="Salário">
-            💰 Salário
-          </option>
-
-          <option value="Compras">
-            🛒 Compras
-          </option>
-
-          <option value="Educação">
-            📚 Educação
-          </option>
-
-          <option value="Contas">
-            💡 Contas
-          </option>
-
-          <option value="Outros">
-            📦 Outros
-          </option>
-
-        </select>
-
-      </div>
+        </div>
 
 
-      <div class="campo">
+        <div class="campo">
 
-        <label for="tipo">
-          Tipo de movimentação
-        </label>
+          <label for="data">
+            📅 Data
+          </label>
 
-        <select id="tipo">
+          <input
+            type="date"
+            id="data"
+          >
 
-          <option value="receita">
-            📈 Receita
-          </option>
+        </div>
 
-          <option value="despesa">
-            📉 Despesa
-          </option>
 
-        </select>
+        <div class="campo">
+
+          <label for="categoria">
+            🏷️ Categoria
+          </label>
+
+          <select id="categoria">
+
+            <option value="" disabled selected>
+              Selecione uma categoria
+            </option>
+
+            <option value="Alimentação">
+              🍔 Alimentação
+            </option>
+
+            <option value="Transporte">
+              🚗 Transporte
+            </option>
+
+            <option value="Moradia">
+              🏠 Moradia
+            </option>
+
+            <option value="Salário">
+              💰 Salário
+            </option>
+
+            <option value="Compras">
+              🛒 Compras
+            </option>
+
+            <option value="Educação">
+              📚 Educação
+            </option>
+
+            <option value="Contas">
+              💡 Contas
+            </option>
+
+            <option value="Outros">
+              📦 Outros
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="tipo">
+            Tipo
+          </label>
+
+          <select id="tipo">
+
+            <option value="receita">
+              📈 Receita
+            </option>
+
+            <option value="despesa">
+              📉 Despesa
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
@@ -198,23 +211,211 @@
     </section>
 
 
+    <!-- FILTROS -->
+
+    <section class="filtros">
+
+      <div class="filtro-campo">
+
+        <label for="pesquisa">
+          🔎 Pesquisar
+        </label>
+
+        <input
+          type="text"
+          id="pesquisa"
+          placeholder="Digite uma descrição..."
+          oninput="atualizarTela()"
+        >
+
+      </div>
+
+
+      <div class="filtro-campo">
+
+        <label for="filtroTipo">
+          📊 Tipo
+        </label>
+
+        <select
+          id="filtroTipo"
+          onchange="atualizarTela()"
+        >
+
+          <option value="todos">
+            Todos
+          </option>
+
+          <option value="receita">
+            Receitas
+          </option>
+
+          <option value="despesa">
+            Despesas
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filtro-campo">
+
+        <label for="filtroCategoria">
+          🏷️ Categoria
+        </label>
+
+        <select
+          id="filtroCategoria"
+          onchange="atualizarTela()"
+        >
+
+          <option value="todas">
+            Todas
+          </option>
+
+          <option value="Alimentação">
+            Alimentação
+          </option>
+
+          <option value="Transporte">
+            Transporte
+          </option>
+
+          <option value="Moradia">
+            Moradia
+          </option>
+
+          <option value="Salário">
+            Salário
+          </option>
+
+          <option value="Compras">
+            Compras
+          </option>
+
+          <option value="Educação">
+            Educação
+          </option>
+
+          <option value="Contas">
+            Contas
+          </option>
+
+          <option value="Outros">
+            Outros
+          </option>
+
+        </select>
+
+      </div>
+
+    </section>
+
+
     <!-- MOVIMENTAÇÕES -->
 
     <section class="movimentacoes">
 
       <div class="titulo-movimentacoes">
 
-        <h2>📋 Movimentações</h2>
+        <div>
 
-        <span id="contador">
-          0 movimentações
-        </span>
+          <h2>📋 Movimentações</h2>
+
+          <span id="contadorFiltro">
+            Exibindo todas as movimentações
+          </span>
+
+        </div>
+
+
+        <button
+          class="botao-limpar"
+          onclick="limparTudo()"
+        >
+          🧹 Limpar tudo
+        </button>
 
       </div>
 
+
       <ul id="lista"></ul>
 
+
+      <div
+        id="mensagemVazia"
+        class="mensagem-vazia"
+      >
+
+        📭 Nenhuma movimentação encontrada.
+
+      </div>
+
     </section>
+
+
+    <!-- GRÁFICO -->
+
+    <section class="grafico">
+
+      <h2>📊 Resumo financeiro</h2>
+
+      <div class="barras">
+
+        <div class="barra-container">
+
+          <span>Receitas</span>
+
+          <div class="barra-fundo">
+
+            <div
+              id="barraReceitas"
+              class="barra receita-barra"
+            ></div>
+
+          </div>
+
+          <strong id="percentualReceitas">
+            0%
+          </strong>
+
+        </div>
+
+
+        <div class="barra-container">
+
+          <span>Despesas</span>
+
+          <div class="barra-fundo">
+
+            <div
+              id="barraDespesas"
+              class="barra despesa-barra"
+            ></div>
+
+          </div>
+
+          <strong id="percentualDespesas">
+            0%
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+      <p>
+        Projeto desenvolvido com HTML, CSS e JavaScript.
+      </p>
+
+    </footer>
 
   </div>
 
