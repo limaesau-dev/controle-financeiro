@@ -13,6 +13,9 @@ function adicionarMovimentacao() {
   const data =
     document.getElementById("data").value;
 
+  const categoria =
+    document.getElementById("categoria").value;
+
   const tipo =
     document.getElementById("tipo").value;
 
@@ -34,6 +37,8 @@ function adicionarMovimentacao() {
     valor: valor,
 
     data: data,
+
+    categoria: categoria,
 
     tipo: tipo
 
@@ -108,8 +113,18 @@ function atualizarTela() {
     }
 
 
+    let textoCategoria = "";
+
+    if (movimentacao.categoria) {
+
+      textoCategoria =
+        ` - ${movimentacao.categoria}`;
+
+    }
+
+
     informacoes.textContent =
-      `${movimentacao.descricao} - R$ ${movimentacao.valor.toFixed(2)}${textoData}`;
+      `${movimentacao.descricao} - R$ ${movimentacao.valor.toFixed(2)}${textoCategoria}${textoData}`;
 
 
     informacoes.classList.add(
