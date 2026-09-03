@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+  padding: 30px 15px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.resumo {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card span {
+  display: block;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card strong {
+  font-size: 22px;
+}
+
+.formulario,
+.movimentacoes {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+#lista {
+  list-style: none;
+}
+
+#lista li {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+@media (max-width: 600px) {
+
+  .resumo {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+}
