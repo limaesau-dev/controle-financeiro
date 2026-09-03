@@ -1,14 +1,15 @@
-// ================================
-// DADOS DO SISTEMA
-// ================================
+// ========================================
+// CONTROLE FINANCEIRO
+// ========================================
 
+// Carrega as movimentações salvas no navegador
 let movimentacoes =
   JSON.parse(localStorage.getItem("movimentacoes")) || [];
 
 
-// ================================
-// FORMATAR VALOR EM REAL
-// ================================
+// ========================================
+// FORMATAR VALOR
+// ========================================
 
 function formatarMoeda(valor) {
 
@@ -20,9 +21,9 @@ function formatarMoeda(valor) {
 }
 
 
-// ================================
+// ========================================
 // FORMATAR DATA
-// ================================
+// ========================================
 
 function formatarData(data) {
 
@@ -37,9 +38,9 @@ function formatarData(data) {
 }
 
 
-// ================================
+// ========================================
 // ADICIONAR MOVIMENTAÇÃO
-// ================================
+// ========================================
 
 function adicionarMovimentacao() {
 
@@ -59,7 +60,7 @@ function adicionarMovimentacao() {
     document.getElementById("tipo").value;
 
 
-  // Verificação dos campos
+  // Verifica se os campos obrigatórios foram preenchidos
 
   if (
     descricao === "" ||
@@ -76,7 +77,7 @@ function adicionarMovimentacao() {
   }
 
 
-  // Criando a movimentação
+  // Cria uma nova movimentação
 
   const movimentacao = {
 
@@ -95,12 +96,12 @@ function adicionarMovimentacao() {
   };
 
 
-  // Adiciona na lista
+  // Adiciona a movimentação
 
   movimentacoes.push(movimentacao);
 
 
-  // Salva no navegador
+  // Salva os dados
 
   salvarDados();
 
@@ -123,9 +124,9 @@ function adicionarMovimentacao() {
 }
 
 
-// ================================
+// ========================================
 // SALVAR DADOS
-// ================================
+// ========================================
 
 function salvarDados() {
 
@@ -137,14 +138,25 @@ function salvarDados() {
 }
 
 
-// ================================
+// ========================================
 // ATUALIZAR TELA
-// ================================
+// ========================================
 
 function atualizarTela() {
 
   const lista =
     document.getElementById("lista");
+
+  const pesquisa =
+    document.getElementById("pesquisa").value
+      .toLowerCase()
+      .trim();
+
+  const filtroTipo =
+    document.getElementById("filtroTipo").value;
+
+  const filtroCategoria =
+    document.getElementById("filtroCategoria").value;
 
 
   lista.innerHTML = "";
@@ -155,55 +167,147 @@ function atualizarTela() {
   let totalDespesas = 0;
 
 
-  // Ordena as movimentações mais recentes primeiro
+  // Calcula os valores gerais
 
-  const movimentacoesOrdenadas =
-    [...movimentacoes].sort(function(a, b) {
+  movimentacoes.forEach(function(movimentacao) {
 
-      return new Date(b.data) - new Date(a.data);
+    if (movimentacao.tipo === "receita") {
+
+      totalReceitas += Number(movimentacao.valor);
+
+    } else {
+
+      totalDespesas += Number(movimentacao.valor);
+
+    }
+
+  });
+
+
+  // Filtra as movimentações
+
+  const movimentacoesFiltradas =
+    movimentacoes.filter(function(movimentacao) {
+
+      const descricao =
+        movimentacao.descricao.toLowerCase();
+
+      const categoria =
+        movimentacao.categoria || "Outros";
+
+
+      const correspondePesquisa =
+        descricao.includes(pesquisa);
+
+
+      const correspondeTipo =
+        filtroTipo === "todos" ||
+        movimentacao.tipo === filtroTipo;
+
+
+      const correspondeCategoria =
+        filtroCategoria === "todas" ||
+        categoria === filtroCategoria;
+
+
+      return (
+        correspondePesquisa &&
+        correspondeTipo &&
+        correspondeCategoria
+      );
 
     });
 
 
-  // Verifica cada movimentação
+  // Organiza da data mais recente para a mais antiga
 
-  movimentacoesOrdenadas.forEach(
+  movimentacoesFiltradas.sort(function(a, b) {
+
+    return new Date(b.data) - new Date(a.data);
+
+  });
+
+
+  // Mostra as movimentações
+
+  movimentacoesFiltradas.forEach(
     function(movimentacao) {
-
 
       const item =
         document.createElement("li");
 
 
       const informacoes =
+        document.createElement("div");
+
+
+      informacoes.className =
+        "movimentacao-info";
+
+
+      const descricao =
         document.createElement("span");
 
 
-      // Categoria antiga pode não existir
+      descricao.className =
+        "movimentacao-descricao";
+
+
+      descricao.textContent =
+        movimentacao.descricao;
+
+
+      const detalhes =
+        document.createElement("span");
+
+
+      detalhes.className =
+        "movimentacao-detalhes";
+
 
       const categoria =
         movimentacao.categoria || "Outros";
 
 
-      // Data pode não existir
-
       const data =
         movimentacao.data
           ? formatarData(movimentacao.data)
-          : "";
+          : "Sem data";
 
 
-      // Texto que aparece na lista
+      const nomeTipo =
+        movimentacao.tipo === "receita"
+          ? "Receita"
+          : "Despesa";
 
-      informacoes.textContent =
-        `${movimentacao.descricao} | ${categoria} | ${data} | ${formatarMoeda(movimentacao.valor)}`;
+
+      detalhes.textContent =
+        `${categoria} • ${data} • ${nomeTipo}`;
 
 
-      // Classe receita ou despesa
+      const valor =
+        document.createElement("strong");
 
-      informacoes.classList.add(
+
+      valor.className =
+        "movimentacao-valor";
+
+
+      valor.classList.add(
         movimentacao.tipo
       );
+
+
+      const sinal =
+        movimentacao.tipo === "receita"
+          ? "+ "
+          : "- ";
+
+
+      valor.textContent =
+        sinal + formatarMoeda(
+          Number(movimentacao.valor)
+        );
 
 
       // Botão excluir
@@ -226,42 +330,27 @@ function atualizarTela() {
         };
 
 
-      // Coloca os elementos na tela
+      informacoes.appendChild(descricao);
+
+      informacoes.appendChild(detalhes);
 
       item.appendChild(informacoes);
+
+      item.appendChild(valor);
 
       item.appendChild(botao);
 
       lista.appendChild(item);
 
-
-      // Calcula os totais
-
-      if (
-        movimentacao.tipo === "receita"
-      ) {
-
-        totalReceitas +=
-          Number(movimentacao.valor);
-
-      } else {
-
-        totalDespesas +=
-          Number(movimentacao.valor);
-
-      }
-
     }
   );
 
 
-  // Calcula o saldo
+  // Atualiza os cards
 
   const saldo =
     totalReceitas - totalDespesas;
 
-
-  // Atualiza os cards
 
   document.getElementById("saldo").textContent =
     formatarMoeda(saldo);
@@ -275,36 +364,132 @@ function atualizarTela() {
     formatarMoeda(totalDespesas);
 
 
-  // Atualiza o contador
-
-  const contador =
-    document.getElementById("contador");
-
-
-  const quantidade =
+  document.getElementById("contador").textContent =
     movimentacoes.length;
 
 
-  if (quantidade === 1) {
+  // Atualiza mensagem quando não houver resultados
 
-    contador.textContent =
-      "1 movimentação";
+  const mensagemVazia =
+    document.getElementById("mensagemVazia");
+
+
+  if (movimentacoesFiltradas.length === 0) {
+
+    mensagemVazia.style.display = "block";
 
   } else {
 
-    contador.textContent =
-      `${quantidade} movimentações`;
+    mensagemVazia.style.display = "none";
 
   }
+
+
+  // Atualiza informação dos filtros
+
+  const contadorFiltro =
+    document.getElementById("contadorFiltro");
+
+
+  if (
+    pesquisa !== "" ||
+    filtroTipo !== "todos" ||
+    filtroCategoria !== "todas"
+  ) {
+
+    contadorFiltro.textContent =
+      `${movimentacoesFiltradas.length} resultado(s) encontrado(s)`;
+
+  } else {
+
+    contadorFiltro.textContent =
+      "Exibindo todas as movimentações";
+
+  }
+
+
+  // Atualiza o gráfico
+
+  atualizarGrafico(
+    totalReceitas,
+    totalDespesas
+  );
 
 }
 
 
-// ================================
+// ========================================
+// GRÁFICO
+// ========================================
+
+function atualizarGrafico(
+  totalReceitas,
+  totalDespesas
+) {
+
+  const total =
+    totalReceitas + totalDespesas;
+
+
+  let percentualReceitas = 0;
+
+  let percentualDespesas = 0;
+
+
+  if (total > 0) {
+
+    percentualReceitas =
+      (totalReceitas / total) * 100;
+
+
+    percentualDespesas =
+      (totalDespesas / total) * 100;
+
+  }
+
+
+  document.getElementById(
+    "barraReceitas"
+  ).style.width =
+    `${percentualReceitas}%`;
+
+
+  document.getElementById(
+    "barraDespesas"
+  ).style.width =
+    `${percentualDespesas}%`;
+
+
+  document.getElementById(
+    "percentualReceitas"
+  ).textContent =
+    `${percentualReceitas.toFixed(1)}%`;
+
+
+  document.getElementById(
+    "percentualDespesas"
+  ).textContent =
+    `${percentualDespesas.toFixed(1)}%`;
+
+}
+
+
+// ========================================
 // EXCLUIR MOVIMENTAÇÃO
-// ================================
+// ========================================
 
 function excluirMovimentacao(id) {
+
+  const confirmar =
+    confirm(
+      "Deseja realmente excluir esta movimentação?"
+    );
+
+
+  if (!confirmar) {
+    return;
+  }
+
 
   movimentacoes =
     movimentacoes.filter(
@@ -323,8 +508,45 @@ function excluirMovimentacao(id) {
 }
 
 
-// ================================
+// ========================================
+// LIMPAR TODAS AS MOVIMENTAÇÕES
+// ========================================
+
+function limparTudo() {
+
+  if (movimentacoes.length === 0) {
+
+    alert(
+      "Não existem movimentações para excluir."
+    );
+
+    return;
+  }
+
+
+  const confirmar =
+    confirm(
+      "Tem certeza que deseja apagar TODAS as movimentações?"
+    );
+
+
+  if (!confirmar) {
+    return;
+  }
+
+
+  movimentacoes = [];
+
+
+  salvarDados();
+
+  atualizarTela();
+
+}
+
+
+// ========================================
 // INICIAR SISTEMA
-// ================================
+// ========================================
 
 atualizarTela();
