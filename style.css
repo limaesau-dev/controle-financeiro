@@ -1,44 +1,143 @@
+/* =========================================================
+   CONTROLE FINANCEIRO
+   IDENTIDADE VISUAL - VERSÃO FINAL
+   ========================================================= */
+
+/* =========================
+   RESET
+   ========================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #eef2ff, #f8fafc);
-  color: #1e293b;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.16), transparent 28%),
+    radial-gradient(circle at 90% 15%, rgba(124, 58, 237, 0.13), transparent 25%),
+    linear-gradient(135deg, #eef4ff 0%, #f8fafc 48%, #eef2ff 100%);
+  color: #172033;
   min-height: 100vh;
   padding: 30px 15px;
+  position: relative;
+  overflow-x: hidden;
 }
+
+/* detalhes decorativos do fundo */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  background: #2563eb;
+  top: -100px;
+  left: -100px;
+}
+
+body::after {
+  background: #7c3aed;
+  bottom: -120px;
+  right: -100px;
+}
+
+
+/* =========================
+   CONTAINER
+   ========================= */
 
 .container {
-  max-width: 1100px;
-  margin: auto;
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
 }
 
-/* CABEÇALHO */
+
+/* =========================
+   CABEÇALHO / HERO
+   ========================= */
 
 .cabecalho {
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(96, 165, 250, 0.22), transparent 28%),
+    radial-gradient(circle at 15% 100%, rgba(124, 58, 237, 0.18), transparent 30%),
+    linear-gradient(135deg, #081126 0%, #10295f 55%, #172554 100%);
   color: white;
-  padding: 32px;
-  border-radius: 20px;
+  padding: 42px 40px;
+  border-radius: 24px;
   margin-bottom: 25px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+  box-shadow:
+    0 25px 55px rgba(15, 23, 42, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* brilho decorativo */
+
+.cabecalho::before {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -60px;
+  top: -80px;
+  border-radius: 50%;
+  background: rgba(96, 165, 250, 0.14);
+  filter: blur(5px);
+}
+
+.cabecalho::after {
+  content: "";
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  right: 120px;
+  bottom: -60px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.20);
+}
+
+.cabecalho > div {
+  position: relative;
+  z-index: 2;
 }
 
 .cabecalho h1 {
-  font-size: 32px;
-  margin-bottom: 8px;
+  font-size: clamp(27px, 4vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
 }
 
 .cabecalho p {
   color: #cbd5e1;
   font-size: 15px;
+  line-height: 1.6;
+  max-width: 600px;
 }
 
-/* RESUMO */
+
+/* =========================
+   RESUMO / CARDS
+   ========================= */
 
 .resumo {
   display: grid;
@@ -48,59 +147,107 @@ body {
 }
 
 .card {
-  background: white;
-  padding: 23px;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
-  transition: 0.2s;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.07),
+    0 2px 5px rgba(15, 23, 42, 0.03);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  right: -30px;
+  top: -30px;
+  border-radius: 50%;
+  opacity: 0.07;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  transform: translateY(-5px);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 3px 8px rgba(15, 23, 42, 0.05);
 }
 
 .card span {
   display: block;
   color: #64748b;
   font-size: 13px;
-  margin-bottom: 11px;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
 .card strong {
   display: block;
-  font-size: 23px;
+  font-size: 25px;
+  letter-spacing: -0.5px;
 }
 
 .saldo-card {
   border-left: 5px solid #2563eb;
 }
 
+.saldo-card::after {
+  background: #2563eb;
+}
+
 .receita-card {
   border-left: 5px solid #16a34a;
+}
+
+.receita-card::after {
+  background: #16a34a;
 }
 
 .despesa-card {
   border-left: 5px solid #dc2626;
 }
 
+.despesa-card::after {
+  background: #dc2626;
+}
+
 .quantidade-card {
   border-left: 5px solid #7c3aed;
 }
 
-/* FORMULÁRIO */
+.quantidade-card::after {
+  background: #7c3aed;
+}
+
+
+/* =========================
+   ÁREAS PRINCIPAIS
+   ========================= */
 
 .formulario,
 .filtros,
 .movimentacoes,
 .grafico {
-  background: white;
-  padding: 28px;
-  border-radius: 17px;
-  border: 1px solid #e2e8f0;
+  position: relative;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
   margin-bottom: 25px;
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+  box-shadow:
+    0 10px 35px rgba(15, 23, 42, 0.065),
+    0 2px 6px rgba(15, 23, 42, 0.025);
 }
 
 .formulario h2,
@@ -108,13 +255,19 @@ body {
 .grafico h2 {
   color: #0f172a;
   font-size: 21px;
+  letter-spacing: -0.3px;
   margin-bottom: 22px;
 }
+
+
+/* =========================
+   FORMULÁRIO
+   ========================= */
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  gap: 19px;
 }
 
 .campo {
@@ -124,22 +277,35 @@ body {
 .campo label,
 .filtro-campo label {
   display: block;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 700;
   color: #475569;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 input,
 select {
   width: 100%;
-  padding: 13px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
+  padding: 14px 15px;
+  border: 1px solid #d5deea;
+  border-radius: 11px;
   background: #f8fafc;
-  color: #1e293b;
+  color: #172033;
   font-size: 15px;
-  transition: 0.2s;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:hover,
+select:hover {
+  border-color: #b8c5d8;
 }
 
 input:focus,
@@ -147,31 +313,77 @@ select:focus {
   outline: none;
   border-color: #2563eb;
   background: white;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.10),
+    0 5px 15px rgba(37, 99, 235, 0.06);
 }
 
-/* BOTÃO ADICIONAR */
+
+/* =========================
+   BOTÃO ADICIONAR
+   ========================= */
 
 .botao-adicionar {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  margin-top: 20px;
-  padding: 14px;
+  margin-top: 21px;
+  padding: 15px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: 11px;
+  background:
+    linear-gradient(135deg, #2563eb 0%, #1d4ed8 55%, #4338ca 100%);
   color: white;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 0.1px;
   cursor: pointer;
-  transition: 0.2s;
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.botao-adicionar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
 }
 
 .botao-adicionar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.25);
+  filter: brightness(1.05);
+  box-shadow:
+    0 13px 28px rgba(37, 99, 235, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-/* FILTROS */
+.botao-adicionar:hover::before {
+  left: 140%;
+}
+
+.botao-adicionar:active {
+  transform: translateY(0);
+}
+
+
+/* =========================
+   FILTROS
+   ========================= */
 
 .filtros {
   display: grid;
@@ -184,7 +396,10 @@ select:focus {
   margin-top: 0;
 }
 
-/* TÍTULO DAS MOVIMENTAÇÕES */
+
+/* =========================
+   TÍTULO MOVIMENTAÇÕES
+   ========================= */
 
 .titulo-movimentacoes {
   display: flex;
@@ -203,25 +418,37 @@ select:focus {
   font-size: 13px;
 }
 
-/* BOTÃO LIMPAR */
+
+/* =========================
+   BOTÃO LIMPAR
+   ========================= */
 
 .botao-limpar {
   width: auto;
-  padding: 9px 14px;
-  border: none;
+  padding: 10px 15px;
+  border: 1px solid #fecaca;
   border-radius: 9px;
-  background: #fee2e2;
+  background: #fff1f2;
   color: #b91c1c;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .botao-limpar:hover {
-  background: #fecaca;
+  background: #fee2e2;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(220, 38, 38, 0.10);
 }
 
-/* LISTA */
+
+/* =========================
+   LISTA DE MOVIMENTAÇÕES
+   ========================= */
 
 #lista {
   list-style: none;
@@ -231,32 +458,46 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 17px 0;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 17px 14px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#lista li:hover {
+  background: #f8fafc;
+  border-color: #e5eaf1;
+  transform: translateX(3px);
 }
 
 #lista li:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .movimentacao-info {
   flex: 1;
+  min-width: 0;
 }
 
 .movimentacao-descricao {
   display: block;
   color: #0f172a;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 6px;
+  overflow-wrap: anywhere;
 }
 
 .movimentacao-detalhes {
   color: #64748b;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .movimentacao-valor {
-  font-weight: bold;
+  font-weight: 800;
   font-size: 16px;
   white-space: nowrap;
 }
@@ -269,92 +510,198 @@ select:focus {
   color: #dc2626;
 }
 
-/* BOTÃO EXCLUIR */
+
+/* =========================
+   BOTÃO EXCLUIR
+   ========================= */
 
 #lista button {
   width: auto;
   padding: 8px 12px;
-  border: none;
+  border: 1px solid #fecaca;
   border-radius: 8px;
-  background: #fee2e2;
+  background: #fff1f2;
   color: #b91c1c;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 #lista button:hover {
-  background: #fecaca;
+  background: #fee2e2;
+  transform: scale(1.03);
 }
 
-/* MENSAGEM VAZIA */
+
+/* =========================
+   MENSAGEM VAZIA
+   ========================= */
 
 .mensagem-vazia {
   text-align: center;
-  padding: 30px 10px;
+  padding: 38px 10px;
   color: #94a3b8;
   font-size: 14px;
 }
 
-/* GRÁFICO */
+
+/* =========================
+   GRÁFICO
+   ========================= */
+
+.grafico {
+  overflow: hidden;
+}
+
+.grafico::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -80px;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.06);
+  pointer-events: none;
+}
 
 .barra-container {
-  margin-bottom: 22px;
+  margin-bottom: 24px;
+}
+
+.barra-container:last-child {
+  margin-bottom: 0;
 }
 
 .barra-container > span {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
   color: #475569;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .barra-fundo {
   width: 100%;
-  height: 14px;
-  background: #e2e8f0;
+  height: 16px;
+  background: #e8edf5;
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
 .barra {
   height: 100%;
   width: 0%;
   border-radius: 20px;
-  transition: width 0.5s ease;
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .receita-barra {
-  background: #16a34a;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.25);
 }
 
 .despesa-barra {
-  background: #dc2626;
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.22);
 }
 
 .barra-container strong {
   display: block;
-  margin-top: 6px;
+  margin-top: 7px;
   color: #64748b;
   font-size: 12px;
 }
 
-/* RODAPÉ */
+
+/* =========================
+   RODAPÉ
+   ========================= */
 
 footer {
   text-align: center;
-  padding: 10px 0 20px;
+  padding: 12px 0 22px;
 }
 
 footer p {
   color: #94a3b8;
-  font-size: 13px;
+  font-size: 12px;
 }
 
-/* TABLET */
+
+/* =========================
+   BARRA DE ROLAGEM
+   ========================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eef2f7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8c4d6;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* =========================
+   ANIMAÇÃO DE ENTRADA
+   ========================= */
+
+.cabecalho,
+.card,
+.formulario,
+.filtros,
+.movimentacoes,
+.grafico {
+  animation: aparecer 0.55s ease both;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.10s;
+}
+
+.card:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
 
 @media (max-width: 900px) {
+
+  body {
+    padding: 22px 13px;
+  }
 
   .resumo {
     grid-template-columns: repeat(2, 1fr);
@@ -368,38 +715,82 @@ footer p {
     grid-column: 1 / -1;
   }
 
+  .cabecalho {
+    padding: 34px;
+  }
+
 }
 
-/* CELULAR */
+
+/* =========================
+   CELULAR
+   ========================= */
 
 @media (max-width: 600px) {
 
   body {
-    padding: 15px 10px;
+    padding: 12px 9px;
+    background:
+      radial-gradient(circle at 10% 5%, rgba(37, 99, 235, 0.13), transparent 30%),
+      linear-gradient(135deg, #f3f6fb, #f8fafc);
+  }
+
+  .container {
+    width: 100%;
   }
 
   .cabecalho {
-    padding: 24px;
-    border-radius: 16px;
+    padding: 28px 22px;
+    border-radius: 19px;
+    margin-bottom: 17px;
   }
 
   .cabecalho h1 {
-    font-size: 26px;
+    font-size: 27px;
+  }
+
+  .cabecalho p {
+    font-size: 14px;
   }
 
   .resumo {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 17px;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .card {
+    padding: 18px 15px;
+    border-radius: 15px;
+  }
+
+  .card span {
+    font-size: 11px;
+  }
+
+  .card strong {
+    font-size: 18px;
   }
 
   .formulario,
   .filtros,
   .movimentacoes,
   .grafico {
-    padding: 20px;
+    padding: 19px 16px;
+    border-radius: 16px;
+    margin-bottom: 17px;
+  }
+
+  .formulario h2,
+  .movimentacoes h2,
+  .grafico h2 {
+    font-size: 19px;
+    margin-bottom: 19px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 
   .filtros {
@@ -410,9 +801,19 @@ footer p {
     grid-column: auto;
   }
 
+  input,
+  select {
+    padding: 13px;
+  }
+
+  .botao-adicionar {
+    padding: 14px;
+  }
+
   .titulo-movimentacoes {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 13px;
   }
 
   .botao-limpar {
@@ -421,18 +822,169 @@ footer p {
 
   #lista li {
     flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px 10px;
   }
 
   .movimentacao-info {
     width: 100%;
+    flex: none;
   }
 
   .movimentacao-valor {
     flex: 1;
+    font-size: 15px;
   }
 
   #lista button {
-    width: auto;
+    padding: 8px 10px;
+  }
+
+}
+
+
+/* =========================
+   CELULARES MUITO PEQUENOS
+   ========================= */
+
+@media (max-width: 380px) {
+
+  .resumo {
+    grid-template-columns: 1fr;
+  }
+
+  .cabecalho h1 {
+    font-size: 24px;
+  }
+
+  .card strong {
+    font-size: 20px;
+  }
+
+}
+
+
+/* =========================
+   MODO ESCURO
+   Ativa quando o aparelho estiver
+   configurado para tema escuro.
+   ========================= */
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background:
+      radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.16), transparent 28%),
+      radial-gradient(circle at 90% 15%, rgba(124, 58, 237, 0.12), transparent 25%),
+      linear-gradient(135deg, #070d1b, #0f172a 50%, #111827);
+    color: #e5e7eb;
+  }
+
+  .card,
+  .formulario,
+  .filtros,
+  .movimentacoes,
+  .grafico {
+    background: rgba(15, 23, 42, 0.88);
+    border-color: #263449;
+    box-shadow:
+      0 12px 35px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  }
+
+  .card span,
+  .campo label,
+  .filtro-campo label,
+  .barra-container > span {
+    color: #94a3b8;
+  }
+
+  .card strong,
+  .formulario h2,
+  .movimentacoes h2,
+  .grafico h2,
+  .movimentacao-descricao {
+    color: #f8fafc;
+  }
+
+  input,
+  select {
+    background: #0b1324;
+    color: #e5e7eb;
+    border-color: #334155;
+  }
+
+  input::placeholder {
+    color: #64748b;
+  }
+
+  input:focus,
+  select:focus {
+    background: #0f172a;
+  }
+
+  #lista li:hover {
+    background: #111c30;
+    border-color: #263449;
+  }
+
+  .movimentacao-detalhes,
+  #contadorFiltro,
+  .barra-container strong {
+    color: #94a3b8;
+  }
+
+  .barra-fundo {
+    background: #1e293b;
+  }
+
+  .botao-limpar,
+  #lista button {
+    background: rgba(127, 29, 29, 0.18);
+    border-color: rgba(248, 113, 113, 0.25);
+    color: #fca5a5;
+  }
+
+  .botao-limpar:hover,
+  #lista button:hover {
+    background: rgba(127, 29, 29, 0.30);
+  }
+
+  .mensagem-vazia,
+  footer p {
+    color: #64748b;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+
+/* =========================
+   ACESSIBILIDADE
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
 }
