@@ -1,29 +1,39 @@
-// ========================================
+// ========================================================
+// FINANZY
 // CONTROLE FINANCEIRO
-// ========================================
+// ========================================================
 
-// Carrega as movimentações salvas no navegador
+
+// ========================================================
+// CARREGAR DADOS
+// ========================================================
+
 let movimentacoes =
-  JSON.parse(localStorage.getItem("movimentacoes")) || [];
+  JSON.parse(
+    localStorage.getItem("movimentacoes")
+  ) || [];
 
 
-// ========================================
-// FORMATAR VALOR
-// ========================================
+// ========================================================
+// FORMATAR MOEDA
+// ========================================================
 
 function formatarMoeda(valor) {
 
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  }).format(valor);
+  return new Intl.NumberFormat(
+    "pt-BR",
+    {
+      style: "currency",
+      currency: "BRL"
+    }
+  ).format(valor);
 
 }
 
 
-// ========================================
+// ========================================================
 // FORMATAR DATA
-// ========================================
+// ========================================================
 
 function formatarData(data) {
 
@@ -38,29 +48,42 @@ function formatarData(data) {
 }
 
 
-// ========================================
+// ========================================================
 // ADICIONAR MOVIMENTAÇÃO
-// ========================================
+// ========================================================
 
 function adicionarMovimentacao() {
 
   const descricao =
-    document.getElementById("descricao").value.trim();
+    document
+      .getElementById("descricao")
+      .value
+      .trim();
 
   const valor =
-    Number(document.getElementById("valor").value);
+    Number(
+      document
+        .getElementById("valor")
+        .value
+    );
 
   const data =
-    document.getElementById("data").value;
+    document
+      .getElementById("data")
+      .value;
 
   const categoria =
-    document.getElementById("categoria").value;
+    document
+      .getElementById("categoria")
+      .value;
 
   const tipo =
-    document.getElementById("tipo").value;
+    document
+      .getElementById("tipo")
+      .value;
 
 
-  // Verifica se os campos obrigatórios foram preenchidos
+  // Verificação dos campos
 
   if (
     descricao === "" ||
@@ -77,7 +100,7 @@ function adicionarMovimentacao() {
   }
 
 
-  // Cria uma nova movimentação
+  // Criar movimentação
 
   const movimentacao = {
 
@@ -96,67 +119,88 @@ function adicionarMovimentacao() {
   };
 
 
-  // Adiciona a movimentação
+  // Adicionar à lista
 
-  movimentacoes.push(movimentacao);
+  movimentacoes.push(
+    movimentacao
+  );
 
 
-  // Salva os dados
+  // Salvar
 
   salvarDados();
 
 
-  // Limpa os campos
+  // Limpar formulário
 
-  document.getElementById("descricao").value = "";
+  document
+    .getElementById("descricao")
+    .value = "";
 
-  document.getElementById("valor").value = "";
+  document
+    .getElementById("valor")
+    .value = "";
 
-  document.getElementById("data").value = "";
+  document
+    .getElementById("data")
+    .value = "";
 
-  document.getElementById("categoria").value = "";
+  document
+    .getElementById("categoria")
+    .value = "";
 
 
-  // Atualiza a tela
+  // Atualizar tela
 
   atualizarTela();
 
 }
 
 
-// ========================================
+// ========================================================
 // SALVAR DADOS
-// ========================================
+// ========================================================
 
 function salvarDados() {
 
   localStorage.setItem(
     "movimentacoes",
-    JSON.stringify(movimentacoes)
+    JSON.stringify(
+      movimentacoes
+    )
   );
 
 }
 
 
-// ========================================
+// ========================================================
 // ATUALIZAR TELA
-// ========================================
+// ========================================================
 
 function atualizarTela() {
 
   const lista =
     document.getElementById("lista");
 
+
   const pesquisa =
-    document.getElementById("pesquisa").value
+    document
+      .getElementById("pesquisa")
+      .value
       .toLowerCase()
       .trim();
 
+
   const filtroTipo =
-    document.getElementById("filtroTipo").value;
+    document
+      .getElementById("filtroTipo")
+      .value;
+
 
   const filtroCategoria =
-    document.getElementById("filtroCategoria").value;
+    document
+      .getElementById("filtroCategoria")
+      .value;
 
 
   lista.innerHTML = "";
@@ -167,68 +211,98 @@ function atualizarTela() {
   let totalDespesas = 0;
 
 
-  // Calcula os valores gerais
+  // ======================================================
+  // CALCULAR TOTAIS
+  // ======================================================
 
-  movimentacoes.forEach(function(movimentacao) {
+  movimentacoes.forEach(
+    function(movimentacao) {
 
-    if (movimentacao.tipo === "receita") {
+      if (
+        movimentacao.tipo === "receita"
+      ) {
 
-      totalReceitas += Number(movimentacao.valor);
+        totalReceitas +=
+          Number(
+            movimentacao.valor
+          );
 
-    } else {
+      } else {
 
-      totalDespesas += Number(movimentacao.valor);
+        totalDespesas +=
+          Number(
+            movimentacao.valor
+          );
+
+      }
 
     }
+  );
 
-  });
 
-
-  // Filtra as movimentações
+  // ======================================================
+  // FILTRAR
+  // ======================================================
 
   const movimentacoesFiltradas =
-    movimentacoes.filter(function(movimentacao) {
+    movimentacoes.filter(
+      function(movimentacao) {
 
-      const descricao =
-        movimentacao.descricao.toLowerCase();
-
-      const categoria =
-        movimentacao.categoria || "Outros";
-
-
-      const correspondePesquisa =
-        descricao.includes(pesquisa);
+        const descricao =
+          movimentacao.descricao
+            .toLowerCase();
 
 
-      const correspondeTipo =
-        filtroTipo === "todos" ||
-        movimentacao.tipo === filtroTipo;
+        const categoria =
+          movimentacao.categoria ||
+          "Outros";
 
 
-      const correspondeCategoria =
-        filtroCategoria === "todas" ||
-        categoria === filtroCategoria;
+        const correspondePesquisa =
+          descricao.includes(
+            pesquisa
+          );
 
+
+        const correspondeTipo =
+          filtroTipo === "todos" ||
+          movimentacao.tipo === filtroTipo;
+
+
+        const correspondeCategoria =
+          filtroCategoria === "todas" ||
+          categoria === filtroCategoria;
+
+
+        return (
+          correspondePesquisa &&
+          correspondeTipo &&
+          correspondeCategoria
+        );
+
+      }
+    );
+
+
+  // ======================================================
+  // ORDENAR POR DATA
+  // ======================================================
+
+  movimentacoesFiltradas.sort(
+    function(a, b) {
 
       return (
-        correspondePesquisa &&
-        correspondeTipo &&
-        correspondeCategoria
+        new Date(b.data) -
+        new Date(a.data)
       );
 
-    });
+    }
+  );
 
 
-  // Organiza da data mais recente para a mais antiga
-
-  movimentacoesFiltradas.sort(function(a, b) {
-
-    return new Date(b.data) - new Date(a.data);
-
-  });
-
-
-  // Mostra as movimentações
+  // ======================================================
+  // MOSTRAR MOVIMENTAÇÕES
+  // ======================================================
 
   movimentacoesFiltradas.forEach(
     function(movimentacao) {
@@ -266,12 +340,15 @@ function atualizarTela() {
 
 
       const categoria =
-        movimentacao.categoria || "Outros";
+        movimentacao.categoria ||
+        "Outros";
 
 
       const data =
         movimentacao.data
-          ? formatarData(movimentacao.data)
+          ? formatarData(
+              movimentacao.data
+            )
           : "Sem data";
 
 
@@ -281,9 +358,43 @@ function atualizarTela() {
           : "Despesa";
 
 
-      detalhes.textContent =
-        `${categoria} • ${data} • ${nomeTipo}`;
+      // ==================================================
+      // ÍCONE DA CATEGORIA
+      // ==================================================
 
+      const iconesCategoria = {
+
+        "Alimentação": "🍔",
+
+        "Transporte": "🚗",
+
+        "Moradia": "🏠",
+
+        "Salário": "💰",
+
+        "Compras": "🛒",
+
+        "Educação": "📚",
+
+        "Contas": "💡",
+
+        "Outros": "📦"
+
+      };
+
+
+      const icone =
+        iconesCategoria[categoria] ||
+        "📦";
+
+
+      detalhes.textContent =
+        `${icone} ${categoria}  •  📅 ${data}  •  ${nomeTipo}`;
+
+
+      // ==================================================
+      // VALOR
+      // ==================================================
 
       const valor =
         document.createElement("strong");
@@ -305,12 +416,17 @@ function atualizarTela() {
 
 
       valor.textContent =
-        sinal + formatarMoeda(
-          Number(movimentacao.valor)
+        sinal +
+        formatarMoeda(
+          Number(
+            movimentacao.valor
+          )
         );
 
 
-      // Botão excluir
+      // ==================================================
+      // BOTÃO EXCLUIR
+      // ==================================================
 
       const botao =
         document.createElement("button");
@@ -318,6 +434,10 @@ function atualizarTela() {
 
       botao.textContent =
         "Excluir";
+
+
+      botao.type =
+        "button";
 
 
       botao.onclick =
@@ -330,65 +450,110 @@ function atualizarTela() {
         };
 
 
-      informacoes.appendChild(descricao);
+      // ==================================================
+      // MONTAR ITEM
+      // ==================================================
 
-      informacoes.appendChild(detalhes);
+      informacoes.appendChild(
+        descricao
+      );
 
-      item.appendChild(informacoes);
+      informacoes.appendChild(
+        detalhes
+      );
 
-      item.appendChild(valor);
+      item.appendChild(
+        informacoes
+      );
 
-      item.appendChild(botao);
+      item.appendChild(
+        valor
+      );
 
-      lista.appendChild(item);
+      item.appendChild(
+        botao
+      );
+
+      lista.appendChild(
+        item
+      );
 
     }
   );
 
 
-  // Atualiza os cards
+  // ======================================================
+  // SALDO
+  // ======================================================
 
   const saldo =
-    totalReceitas - totalDespesas;
+    totalReceitas -
+    totalDespesas;
 
 
-  document.getElementById("saldo").textContent =
-    formatarMoeda(saldo);
+  document
+    .getElementById("saldo")
+    .textContent =
+      formatarMoeda(
+        saldo
+      );
 
 
-  document.getElementById("receitas").textContent =
-    formatarMoeda(totalReceitas);
+  document
+    .getElementById("receitas")
+    .textContent =
+      formatarMoeda(
+        totalReceitas
+      );
 
 
-  document.getElementById("despesas").textContent =
-    formatarMoeda(totalDespesas);
+  document
+    .getElementById("despesas")
+    .textContent =
+      formatarMoeda(
+        totalDespesas
+      );
 
 
-  document.getElementById("contador").textContent =
-    movimentacoes.length;
+  document
+    .getElementById("contador")
+    .textContent =
+      movimentacoes.length;
 
 
-  // Atualiza mensagem quando não houver resultados
+  // ======================================================
+  // MENSAGEM VAZIA
+  // ======================================================
 
   const mensagemVazia =
-    document.getElementById("mensagemVazia");
+    document.getElementById(
+      "mensagemVazia"
+    );
 
 
-  if (movimentacoesFiltradas.length === 0) {
+  if (
+    movimentacoesFiltradas.length === 0
+  ) {
 
-    mensagemVazia.style.display = "block";
+    mensagemVazia.style.display =
+      "flex";
 
   } else {
 
-    mensagemVazia.style.display = "none";
+    mensagemVazia.style.display =
+      "none";
 
   }
 
 
-  // Atualiza informação dos filtros
+  // ======================================================
+  // CONTADOR DOS FILTROS
+  // ======================================================
 
   const contadorFiltro =
-    document.getElementById("contadorFiltro");
+    document.getElementById(
+      "contadorFiltro"
+    );
 
 
   if (
@@ -408,7 +573,9 @@ function atualizarTela() {
   }
 
 
-  // Atualiza o gráfico
+  // ======================================================
+  // GRÁFICO
+  // ======================================================
 
   atualizarGrafico(
     totalReceitas,
@@ -418,9 +585,9 @@ function atualizarTela() {
 }
 
 
-// ========================================
+// ========================================================
 // GRÁFICO
-// ========================================
+// ========================================================
 
 function atualizarGrafico(
   totalReceitas,
@@ -428,7 +595,8 @@ function atualizarGrafico(
 ) {
 
   const total =
-    totalReceitas + totalDespesas;
+    totalReceitas +
+    totalDespesas;
 
 
   let percentualReceitas = 0;
@@ -439,44 +607,58 @@ function atualizarGrafico(
   if (total > 0) {
 
     percentualReceitas =
-      (totalReceitas / total) * 100;
+      (
+        totalReceitas /
+        total
+      ) * 100;
 
 
     percentualDespesas =
-      (totalDespesas / total) * 100;
+      (
+        totalDespesas /
+        total
+      ) * 100;
 
   }
 
 
-  document.getElementById(
-    "barraReceitas"
-  ).style.width =
-    `${percentualReceitas}%`;
+  document
+    .getElementById(
+      "barraReceitas"
+    )
+    .style.width =
+      `${percentualReceitas}%`;
 
 
-  document.getElementById(
-    "barraDespesas"
-  ).style.width =
-    `${percentualDespesas}%`;
+  document
+    .getElementById(
+      "barraDespesas"
+    )
+    .style.width =
+      `${percentualDespesas}%`;
 
 
-  document.getElementById(
-    "percentualReceitas"
-  ).textContent =
-    `${percentualReceitas.toFixed(1)}%`;
+  document
+    .getElementById(
+      "percentualReceitas"
+    )
+    .textContent =
+      `${percentualReceitas.toFixed(1)}%`;
 
 
-  document.getElementById(
-    "percentualDespesas"
-  ).textContent =
-    `${percentualDespesas.toFixed(1)}%`;
+  document
+    .getElementById(
+      "percentualDespesas"
+    )
+    .textContent =
+      `${percentualDespesas.toFixed(1)}%`;
 
 }
 
 
-// ========================================
+// ========================================================
 // EXCLUIR MOVIMENTAÇÃO
-// ========================================
+// ========================================================
 
 function excluirMovimentacao(id) {
 
@@ -495,7 +677,9 @@ function excluirMovimentacao(id) {
     movimentacoes.filter(
       function(movimentacao) {
 
-        return movimentacao.id !== id;
+        return (
+          movimentacao.id !== id
+        );
 
       }
     );
@@ -508,13 +692,15 @@ function excluirMovimentacao(id) {
 }
 
 
-// ========================================
-// LIMPAR TODAS AS MOVIMENTAÇÕES
-// ========================================
+// ========================================================
+// LIMPAR TUDO
+// ========================================================
 
 function limparTudo() {
 
-  if (movimentacoes.length === 0) {
+  if (
+    movimentacoes.length === 0
+  ) {
 
     alert(
       "Não existem movimentações para excluir."
@@ -545,8 +731,104 @@ function limparTudo() {
 }
 
 
-// ========================================
-// INICIAR SISTEMA
-// ========================================
+// ========================================================
+// MODO ESCURO
+// ========================================================
+
+function alternarTema() {
+
+  document.body.classList.toggle(
+    "dark-mode"
+  );
+
+
+  const modoEscuro =
+    document.body.classList.contains(
+      "dark-mode"
+    );
+
+
+  localStorage.setItem(
+    "temaFinanzy",
+    modoEscuro
+      ? "escuro"
+      : "claro"
+  );
+
+
+  atualizarBotaoTema();
+
+}
+
+
+// ========================================================
+// ATUALIZAR BOTÃO DO TEMA
+// ========================================================
+
+function atualizarBotaoTema() {
+
+  const botao =
+    document.getElementById(
+      "botaoTema"
+    );
+
+
+  if (!botao) {
+    return;
+  }
+
+
+  const modoEscuro =
+    document.body.classList.contains(
+      "dark-mode"
+    );
+
+
+  if (modoEscuro) {
+
+    botao.innerHTML =
+      "☀️ <span>Modo claro</span>";
+
+  } else {
+
+    botao.innerHTML =
+      "🌙 <span>Modo escuro</span>";
+
+  }
+
+}
+
+
+// ========================================================
+// CARREGAR TEMA SALVO
+// ========================================================
+
+function carregarTema() {
+
+  const tema =
+    localStorage.getItem(
+      "temaFinanzy"
+    );
+
+
+  if (tema === "escuro") {
+
+    document.body.classList.add(
+      "dark-mode"
+    );
+
+  }
+
+
+  atualizarBotaoTema();
+
+}
+
+
+// ========================================================
+// INICIALIZAR SISTEMA
+// ========================================================
+
+carregarTema();
 
 atualizarTela();
