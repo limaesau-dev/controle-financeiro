@@ -5,88 +5,366 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <title>Controle Financeiro</title>
+  <meta
+    name="description"
+    content="Controle Financeiro - sistema web para organização de receitas e despesas."
+  >
 
-  <link rel="stylesheet" href="style.css">
+  <title>Finanzy — Controle Financeiro</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
 </head>
 
 <body>
 
+  <!-- ELEMENTOS DECORATIVOS -->
+
+  <div class="background-shape shape-one"></div>
+  <div class="background-shape shape-two"></div>
+
+
   <div class="container">
 
-    <!-- CABEÇALHO -->
 
-    <header class="cabecalho">
+    <!-- ==================================================
+         HERO
+         ================================================== -->
 
-      <div>
-        <h1>💰 Controle Financeiro</h1>
+    <header class="hero">
 
-        <p>
-          Organize suas receitas e despesas de forma simples.
-        </p>
+      <div class="hero-content">
+
+        <div class="brand">
+
+          <div class="brand-logo">
+            💰
+          </div>
+
+          <div>
+
+            <strong>FINANZY</strong>
+
+            <span>
+              Controle financeiro inteligente
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-text">
+
+          <div class="hero-badge">
+            ✨ Seu dinheiro. Sua organização.
+          </div>
+
+          <h1>
+            Controle suas finanças
+            <span>com mais inteligência.</span>
+          </h1>
+
+          <p>
+            Organize suas receitas e despesas,
+            acompanhe seu saldo e tenha uma visão
+            clara da sua vida financeira.
+          </p>
+
+        </div>
+
+
+        <div class="hero-actions">
+
+          <a
+            href="#nova-movimentacao"
+            class="hero-button"
+          >
+            ➕ Nova movimentação
+          </a>
+
+          <button
+            class="theme-button"
+            onclick="alternarTema()"
+            id="botaoTema"
+            type="button"
+          >
+            🌙
+            <span>Modo escuro</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-visual">
+
+        <div class="visual-card">
+
+          <div class="visual-top">
+
+            <span>
+              Saldo disponível
+            </span>
+
+            <span class="visual-icon">
+              💳
+            </span>
+
+          </div>
+
+          <strong>
+            R$ 12.580,40
+          </strong>
+
+          <div class="visual-line"></div>
+
+          <div class="visual-bottom">
+
+            <span>
+              📈 +12,8% este mês
+            </span>
+
+            <span>
+              ● Ativo
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="floating-card floating-one">
+
+          <span>Receitas</span>
+
+          <strong>+ R$ 4.850</strong>
+
+          <small>↗ Entradas</small>
+
+        </div>
+
+
+        <div class="floating-card floating-two">
+
+          <span>Despesas</span>
+
+          <strong>- R$ 1.240</strong>
+
+          <small>↘ Saídas</small>
+
+        </div>
+
       </div>
 
     </header>
 
 
-    <!-- RESUMO -->
+    <!-- ==================================================
+         DASHBOARD
+         ================================================== -->
+
+    <section class="dashboard-title">
+
+      <div>
+
+        <span class="section-label">
+          VISÃO GERAL
+        </span>
+
+        <h2>
+          Seu painel financeiro
+        </h2>
+
+      </div>
+
+      <div class="status-online">
+        <span></span>
+        Dados salvos automaticamente
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         CARDS
+         ================================================== -->
 
     <section class="resumo">
 
+
       <div class="card saldo-card">
 
-        <span>💰 Saldo atual</span>
+        <div class="card-header">
 
-        <strong id="saldo">R$ 0,00</strong>
+          <div class="card-icon">
+            💰
+          </div>
+
+          <span class="card-tag">
+            SALDO
+          </span>
+
+        </div>
+
+        <span class="card-label">
+          Saldo atual
+        </span>
+
+        <strong id="saldo">
+          R$ 0,00
+        </strong>
+
+        <div class="card-footer">
+          <span>Disponível</span>
+          <span>● Atualizado</span>
+        </div>
 
       </div>
 
 
       <div class="card receita-card">
 
-        <span>📈 Total de receitas</span>
+        <div class="card-header">
 
-        <strong id="receitas">R$ 0,00</strong>
+          <div class="card-icon">
+            📈
+          </div>
+
+          <span class="card-tag">
+            ENTRADAS
+          </span>
+
+        </div>
+
+        <span class="card-label">
+          Total de receitas
+        </span>
+
+        <strong id="receitas">
+          R$ 0,00
+        </strong>
+
+        <div class="card-footer">
+          <span>Recebimentos</span>
+          <span>↗ Positivo</span>
+        </div>
 
       </div>
 
 
       <div class="card despesa-card">
 
-        <span>📉 Total de despesas</span>
+        <div class="card-header">
 
-        <strong id="despesas">R$ 0,00</strong>
+          <div class="card-icon">
+            📉
+          </div>
+
+          <span class="card-tag">
+            SAÍDAS
+          </span>
+
+        </div>
+
+        <span class="card-label">
+          Total de despesas
+        </span>
+
+        <strong id="despesas">
+          R$ 0,00
+        </strong>
+
+        <div class="card-footer">
+          <span>Gastos</span>
+          <span>↘ Controle</span>
+        </div>
 
       </div>
 
 
       <div class="card quantidade-card">
 
-        <span>📋 Movimentações</span>
+        <div class="card-header">
 
-        <strong id="contador">0</strong>
+          <div class="card-icon">
+            📋
+          </div>
+
+          <span class="card-tag">
+            REGISTROS
+          </span>
+
+        </div>
+
+        <span class="card-label">
+          Movimentações
+        </span>
+
+        <strong id="contador">
+          0
+        </strong>
+
+        <div class="card-footer">
+          <span>Transações</span>
+          <span>✓ Registradas</span>
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- NOVA MOVIMENTAÇÃO -->
+    <!-- ==================================================
+         NOVA MOVIMENTAÇÃO
+         ================================================== -->
 
-    <section class="formulario">
+    <section
+      class="painel formulario"
+      id="nova-movimentacao"
+    >
 
-      <h2>➕ Nova movimentação</h2>
+      <div class="painel-heading">
+
+        <div class="heading-icon">
+          ➕
+        </div>
+
+        <div>
+
+          <span class="section-label">
+            LANÇAMENTO
+          </span>
+
+          <h2>
+            Nova movimentação
+          </h2>
+
+          <p>
+            Registre uma entrada ou saída financeira.
+          </p>
+
+        </div>
+
+      </div>
 
 
       <div class="form-grid">
 
+
         <div class="campo">
 
           <label for="descricao">
-            Descrição
+            📝 Descrição
           </label>
 
           <input
@@ -101,7 +379,7 @@
         <div class="campo">
 
           <label for="valor">
-            Valor
+            💵 Valor
           </label>
 
           <input
@@ -181,7 +459,7 @@
         <div class="campo">
 
           <label for="tipo">
-            Tipo
+            📊 Tipo de movimentação
           </label>
 
           <select id="tipo">
@@ -198,134 +476,194 @@
 
         </div>
 
+
       </div>
 
 
       <button
         class="botao-adicionar"
         onclick="adicionarMovimentacao()"
+        type="button"
       >
-        ➕ Adicionar movimentação
+
+        <span>＋</span>
+
+        Adicionar movimentação
+
+        <span class="button-arrow">
+          →
+        </span>
+
       </button>
 
     </section>
 
 
-    <!-- FILTROS -->
+    <!-- ==================================================
+         FILTROS
+         ================================================== -->
 
-    <section class="filtros">
+    <section class="painel filtros">
 
-      <div class="filtro-campo">
+      <div class="filtro-heading">
 
-        <label for="pesquisa">
-          🔎 Pesquisar
-        </label>
+        <div class="heading-icon blue">
+          🔎
+        </div>
 
-        <input
-          type="text"
-          id="pesquisa"
-          placeholder="Digite uma descrição..."
-          oninput="atualizarTela()"
-        >
+        <div>
 
-      </div>
+          <span class="section-label">
+            ORGANIZAÇÃO
+          </span>
 
+          <h2>
+            Encontre seus registros
+          </h2>
 
-      <div class="filtro-campo">
-
-        <label for="filtroTipo">
-          📊 Tipo
-        </label>
-
-        <select
-          id="filtroTipo"
-          onchange="atualizarTela()"
-        >
-
-          <option value="todos">
-            Todos
-          </option>
-
-          <option value="receita">
-            Receitas
-          </option>
-
-          <option value="despesa">
-            Despesas
-          </option>
-
-        </select>
+        </div>
 
       </div>
 
 
-      <div class="filtro-campo">
+      <div class="filtros-grid">
 
-        <label for="filtroCategoria">
-          🏷️ Categoria
-        </label>
 
-        <select
-          id="filtroCategoria"
-          onchange="atualizarTela()"
-        >
+        <div class="filtro-campo">
 
-          <option value="todas">
-            Todas
-          </option>
+          <label for="pesquisa">
+            Pesquisar
+          </label>
 
-          <option value="Alimentação">
-            Alimentação
-          </option>
+          <div class="input-icon">
 
-          <option value="Transporte">
-            Transporte
-          </option>
+            <span>🔍</span>
 
-          <option value="Moradia">
-            Moradia
-          </option>
+            <input
+              type="text"
+              id="pesquisa"
+              placeholder="Digite uma descrição..."
+              oninput="atualizarTela()"
+            >
 
-          <option value="Salário">
-            Salário
-          </option>
+          </div>
 
-          <option value="Compras">
-            Compras
-          </option>
+        </div>
 
-          <option value="Educação">
-            Educação
-          </option>
 
-          <option value="Contas">
-            Contas
-          </option>
+        <div class="filtro-campo">
 
-          <option value="Outros">
-            Outros
-          </option>
+          <label for="filtroTipo">
+            Tipo
+          </label>
 
-        </select>
+          <select
+            id="filtroTipo"
+            onchange="atualizarTela()"
+          >
+
+            <option value="todos">
+              📊 Todos
+            </option>
+
+            <option value="receita">
+              📈 Receitas
+            </option>
+
+            <option value="despesa">
+              📉 Despesas
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="filtro-campo">
+
+          <label for="filtroCategoria">
+            Categoria
+          </label>
+
+          <select
+            id="filtroCategoria"
+            onchange="atualizarTela()"
+          >
+
+            <option value="todas">
+              🏷️ Todas
+            </option>
+
+            <option value="Alimentação">
+              🍔 Alimentação
+            </option>
+
+            <option value="Transporte">
+              🚗 Transporte
+            </option>
+
+            <option value="Moradia">
+              🏠 Moradia
+            </option>
+
+            <option value="Salário">
+              💰 Salário
+            </option>
+
+            <option value="Compras">
+              🛒 Compras
+            </option>
+
+            <option value="Educação">
+              📚 Educação
+            </option>
+
+            <option value="Contas">
+              💡 Contas
+            </option>
+
+            <option value="Outros">
+              📦 Outros
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- MOVIMENTAÇÕES -->
+    <!-- ==================================================
+         MOVIMENTAÇÕES
+         ================================================== -->
 
-    <section class="movimentacoes">
+    <section class="painel movimentacoes">
 
       <div class="titulo-movimentacoes">
 
-        <div>
+        <div class="painel-heading compact">
 
-          <h2>📋 Movimentações</h2>
+          <div class="heading-icon purple">
+            📋
+          </div>
 
-          <span id="contadorFiltro">
-            Exibindo todas as movimentações
-          </span>
+          <div>
+
+            <span class="section-label">
+              HISTÓRICO
+            </span>
+
+            <h2>
+              Movimentações
+            </h2>
+
+            <span id="contadorFiltro">
+              Exibindo todas as movimentações
+            </span>
+
+          </div>
 
         </div>
 
@@ -333,6 +671,7 @@
         <button
           class="botao-limpar"
           onclick="limparTudo()"
+          type="button"
         >
           🧹 Limpar tudo
         </button>
@@ -340,7 +679,11 @@
       </div>
 
 
-      <ul id="lista"></ul>
+      <div class="lista-wrapper">
+
+        <ul id="lista"></ul>
+
+      </div>
 
 
       <div
@@ -348,24 +691,79 @@
         class="mensagem-vazia"
       >
 
-        📭 Nenhuma movimentação encontrada.
+        <div class="empty-icon">
+          📭
+        </div>
+
+        <strong>
+          Nenhuma movimentação encontrada
+        </strong>
+
+        <span>
+          Adicione uma nova movimentação para começar.
+        </span>
 
       </div>
 
     </section>
 
 
-    <!-- GRÁFICO -->
+    <!-- ==================================================
+         GRÁFICO
+         ================================================== -->
 
-    <section class="grafico">
+    <section class="painel grafico">
 
-      <h2>📊 Resumo financeiro</h2>
+      <div class="painel-heading">
+
+        <div class="heading-icon orange">
+          📊
+        </div>
+
+        <div>
+
+          <span class="section-label">
+            ANÁLISE
+          </span>
+
+          <h2>
+            Resumo financeiro
+          </h2>
+
+          <p>
+            Compare suas entradas e saídas.
+          </p>
+
+        </div>
+
+      </div>
+
 
       <div class="barras">
 
+
         <div class="barra-container">
 
-          <span>Receitas</span>
+          <div class="barra-info">
+
+            <div>
+
+              <span class="barra-icon receita-icon">
+                📈
+              </span>
+
+              <span>
+                Receitas
+              </span>
+
+            </div>
+
+            <strong id="percentualReceitas">
+              0%
+            </strong>
+
+          </div>
+
 
           <div class="barra-fundo">
 
@@ -376,16 +774,31 @@
 
           </div>
 
-          <strong id="percentualReceitas">
-            0%
-          </strong>
-
         </div>
 
 
         <div class="barra-container">
 
-          <span>Despesas</span>
+          <div class="barra-info">
+
+            <div>
+
+              <span class="barra-icon despesa-icon">
+                📉
+              </span>
+
+              <span>
+                Despesas
+              </span>
+
+            </div>
+
+            <strong id="percentualDespesas">
+              0%
+            </strong>
+
+          </div>
+
 
           <div class="barra-fundo">
 
@@ -396,26 +809,42 @@
 
           </div>
 
-          <strong id="percentualDespesas">
-            0%
-          </strong>
-
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- RODAPÉ -->
+    <!-- ==================================================
+         FOOTER
+         ================================================== -->
 
     <footer>
+
+      <div class="footer-brand">
+
+        <div class="footer-logo">
+          💰
+        </div>
+
+        <strong>
+          FINANZY
+        </strong>
+
+      </div>
 
       <p>
         Projeto desenvolvido com HTML, CSS e JavaScript.
       </p>
 
+      <span>
+        © 2026 • Controle financeiro pessoal
+      </span>
+
     </footer>
+
 
   </div>
 
