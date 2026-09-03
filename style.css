@@ -6,14 +6,17 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #f2f4f7;
-  padding: 30px 15px;
+  background: #f5f7fb;
+  color: #1f2937;
+  padding: 25px 15px;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
 }
+
+/* CABEÇALHO */
 
 h1 {
   font-size: 32px;
@@ -21,115 +24,151 @@ h1 {
 }
 
 p {
-  color: #666;
+  color: #6b7280;
   margin-bottom: 25px;
 }
 
+/* CARDS */
+
 .resumo {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
   margin-bottom: 25px;
 }
 
 .card {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  flex: 1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
 }
 
 .card span {
   display: block;
-  color: #666;
+  color: #6b7280;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
 .card strong {
-  font-size: 22px;
+  font-size: 24px;
 }
+
+/* FORMULÁRIO */
 
 .formulario,
 .movimentacoes {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 22px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
 }
 
 h2 {
-  margin-bottom: 15px;
   font-size: 20px;
+  margin-bottom: 18px;
 }
 
 input,
 select {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 13px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   font-size: 15px;
+  background: white;
 }
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* BOTÕES */
 
 button {
   width: 100%;
-  padding: 12px;
+  padding: 13px;
   border: none;
-  border-radius: 6px;
-  background: #222;
+  border-radius: 8px;
+  background: #2563eb;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: bold;
   cursor: pointer;
 }
 
 button:hover {
-  opacity: 0.85;
+  opacity: 0.9;
 }
+
+/* LISTA */
 
 #lista {
   list-style: none;
 }
 
 #lista li {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+#lista li:last-child {
+  border-bottom: none;
 }
 
 .receita {
-  color: green;
+  color: #16a34a;
   font-weight: bold;
 }
 
 .despesa {
-  color: red;
+  color: #dc2626;
   font-weight: bold;
 }
 
 #lista button {
   width: auto;
   padding: 7px 12px;
+  background: #ef4444;
   font-size: 13px;
-  background: #555;
 }
 
-@media (max-width: 600px) {
+/* CELULAR E TABLET */
 
-  .resumo {
-    flex-direction: column;
+@media (max-width: 700px) {
+
+  body {
+    padding: 20px 12px;
   }
 
   h1 {
-    font-size: 26px;
+    font-size: 27px;
+  }
+
+  .resumo {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 18px;
   }
 
   #lista li {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #lista button {
+    width: 100%;
   }
 
 }
