@@ -5,108 +5,198 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
-  color: #1f2937;
-  padding: 25px 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  color: #1e293b;
+  min-height: 100vh;
+  padding: 30px 15px;
 }
 
 .container {
-  max-width: 1000px;
-  margin: auto;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-/* CABEÇALHO */
+/* =========================
+   CABEÇALHO
+========================= */
 
-h1 {
+.cabecalho {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: white;
+  padding: 30px;
+  border-radius: 18px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.cabecalho h1 {
   font-size: 32px;
   margin-bottom: 8px;
 }
 
-p {
-  color: #6b7280;
-  margin-bottom: 25px;
+.cabecalho p {
+  color: #cbd5e1;
+  margin: 0;
+  font-size: 15px;
 }
 
-/* CARDS */
+/* =========================
+   CARDS DE RESUMO
+========================= */
 
 .resumo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  gap: 18px;
   margin-bottom: 25px;
 }
 
 .card {
   background: white;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.11);
 }
 
 .card span {
   display: block;
-  color: #6b7280;
+  color: #64748b;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .card strong {
-  font-size: 24px;
+  display: block;
+  font-size: 25px;
 }
 
-/* FORMULÁRIO */
+.saldo-card {
+  border-left: 5px solid #2563eb;
+}
+
+.receita-card {
+  border-left: 5px solid #16a34a;
+}
+
+.despesa-card {
+  border-left: 5px solid #dc2626;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
 
 .formulario,
 .movimentacoes {
   background: white;
-  padding: 22px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
 }
 
-h2 {
-  font-size: 20px;
-  margin-bottom: 18px;
+.formulario h2,
+.movimentacoes h2 {
+  font-size: 21px;
+  margin-bottom: 22px;
+  color: #0f172a;
+}
+
+.campo {
+  margin-bottom: 17px;
+}
+
+.campo label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #475569;
+  margin-bottom: 7px;
 }
 
 input,
 select {
   width: 100%;
-  padding: 13px;
-  margin-bottom: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  padding: 13px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
   font-size: 15px;
-  background: white;
+  background: #f8fafc;
+  color: #1e293b;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus,
 select:focus {
   outline: none;
   border-color: #2563eb;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
-/* BOTÕES */
+/* =========================
+   BOTÃO
+========================= */
 
-button {
+.botao-adicionar {
   width: 100%;
-  padding: 13px;
+  padding: 14px;
   border: none;
-  border-radius: 8px;
-  background: #2563eb;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-button:hover {
-  opacity: 0.9;
+.botao-adicionar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.25);
 }
 
-/* LISTA */
+.botao-adicionar:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   TÍTULO DAS MOVIMENTAÇÕES
+========================= */
+
+.titulo-movimentacoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.titulo-movimentacoes h2 {
+  margin-bottom: 0;
+}
+
+#contador {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* =========================
+   LISTA DE MOVIMENTAÇÕES
+========================= */
 
 #lista {
   list-style: none;
@@ -117,16 +207,21 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   gap: 15px;
-  padding: 15px 0;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 17px 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 #lista li:last-child {
   border-bottom: none;
 }
 
+#lista li span {
+  flex: 1;
+  line-height: 1.6;
+}
+
 .receita {
-  color: #16a34a;
+  color: #15803d;
   font-weight: bold;
 }
 
@@ -135,31 +230,62 @@ button:hover {
   font-weight: bold;
 }
 
+/* =========================
+   BOTÃO EXCLUIR
+========================= */
+
 #lista button {
   width: auto;
-  padding: 7px 12px;
-  background: #ef4444;
+  padding: 8px 13px;
+  border: none;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
   font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* CELULAR E TABLET */
+#lista button:hover {
+  background: #fecaca;
+  transform: translateY(-1px);
+}
 
-@media (max-width: 700px) {
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 800px) {
 
   body {
     padding: 20px 12px;
-  }
-
-  h1 {
-    font-size: 27px;
   }
 
   .resumo {
     grid-template-columns: 1fr;
   }
 
-  .card {
-    padding: 18px;
+  .cabecalho {
+    padding: 24px;
+  }
+
+  .cabecalho h1 {
+    font-size: 27px;
+  }
+
+  .formulario,
+  .movimentacoes {
+    padding: 21px;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .titulo-movimentacoes {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   #lista li {
@@ -169,6 +295,10 @@ button:hover {
 
   #lista button {
     width: 100%;
+  }
+
+  .card strong {
+    font-size: 22px;
   }
 
 }
