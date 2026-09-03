@@ -1,64 +1,87 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-  <h1>💰 Controle Financeiro</h1>
+<head>
 
-  <p>Organize suas receitas e despesas</p>
+  <meta charset="UTF-8">
 
-  <div class="resumo">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="card">
-      <span>Saldo</span>
-      <strong id="saldo">R$ 0,00</strong>
+  <title>Controle Financeiro</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>💰 Controle Financeiro</h1>
+
+    <p>Organize suas receitas e despesas</p>
+
+    <div class="resumo">
+
+      <div class="card">
+        <span>Saldo</span>
+        <strong id="saldo">R$ 0,00</strong>
+      </div>
+
+      <div class="card">
+        <span>Receitas</span>
+        <strong id="receitas">R$ 0,00</strong>
+      </div>
+
+      <div class="card">
+        <span>Despesas</span>
+        <strong id="despesas">R$ 0,00</strong>
+      </div>
+
     </div>
 
-    <div class="card">
-      <span>Receitas</span>
-      <strong id="receitas">R$ 0,00</strong>
+    <div class="formulario">
+
+      <h2>Nova movimentação</h2>
+
+      <input
+        type="text"
+        id="descricao"
+        placeholder="Descrição"
+      >
+
+      <input
+        type="number"
+        id="valor"
+        placeholder="Valor"
+      >
+
+      <select id="tipo">
+
+        <option value="receita">Receita</option>
+
+        <option value="despesa">Despesa</option>
+
+      </select>
+
+      <button onclick="adicionarMovimentacao()">
+        Adicionar
+      </button>
+
     </div>
 
-    <div class="card">
-      <span>Despesas</span>
-      <strong id="despesas">R$ 0,00</strong>
+    <div class="movimentacoes">
+
+      <h2>Movimentações</h2>
+
+      <ul id="lista"></ul>
+
     </div>
 
   </div>
 
-  <div class="formulario">
+  <script src="script.js"></script>
 
-    <h2>Nova movimentação</h2>
+</body>
 
-    <input 
-      type="text" 
-      id="descricao" 
-      placeholder="Descrição"
-    >
-
-    <input 
-      type="number" 
-      id="valor" 
-      placeholder="Valor"
-    >
-
-    <select id="tipo">
-
-      <option value="receita">Receita</option>
-
-      <option value="despesa">Despesa</option>
-
-    </select>
-
-    <button onclick="adicionarMovimentacao()">
-      Adicionar
-    </button>
-
-  </div>
-
-  <div class="movimentacoes">
-
-    <h2>Movimentações</h2>
-
-    <ul id="lista"></ul>
-
-  </div>
-
-</div>
+</html>
