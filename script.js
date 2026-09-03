@@ -37,7 +37,6 @@ function adicionarMovimentacao() {
 
   movimentacoes.push(movimentacao);
 
-
   salvarDados();
 
 
@@ -79,21 +78,34 @@ function atualizarTela() {
       document.createElement("li");
 
 
-    item.innerHTML = `
+    const informacoes =
+      document.createElement("span");
 
-      ${movimentacao.descricao}
-      -
-      R$ ${movimentacao.valor.toFixed(2)}
+    informacoes.textContent =
+      `${movimentacao.descricao} - R$ ${movimentacao.valor.toFixed(2)}`;
 
-      <button
-        onclick="excluirMovimentacao(${movimentacao.id})">
 
-        Excluir
+    informacoes.classList.add(
+      movimentacao.tipo
+    );
 
-      </button>
 
-    `;
+    const botao =
+      document.createElement("button");
 
+    botao.textContent = "Excluir";
+
+
+    botao.onclick = function() {
+
+      excluirMovimentacao(movimentacao.id);
+
+    };
+
+
+    item.appendChild(informacoes);
+
+    item.appendChild(botao);
 
     lista.appendChild(item);
 
